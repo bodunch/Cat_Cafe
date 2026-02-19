@@ -9,12 +9,12 @@ public class Movement : MonoBehaviour
     public LayerMask groundMask;
 
     public float mouseSensitivity = 50f;
-    public float jumpHeight = 3.5f;
+    public float jumpHeight = 3f;
 
     public float horizontal;
     public float vertical;
 
-    public float speed = 10f;
+    public float speed = 6f;
 
     public float minLookAngle = -60f;
     public float maxLookAngle = 60f;
@@ -36,8 +36,6 @@ public class Movement : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-
-        
     }
 
     private void FixedUpdate()
@@ -60,13 +58,9 @@ public class Movement : MonoBehaviour
         Vector3 move = transform.right * horizontal + transform.forward * vertical;
         _rb.velocity = new Vector3(move.x * speed, _rb.velocity.y, move.z * speed);
 
-        
-
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, minLookAngle, maxLookAngle);
         _camera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-
     }
 
     private bool CheckIsGrounded()
